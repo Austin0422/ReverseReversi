@@ -15,7 +15,7 @@ import java.util.TimerTask;
 public class GameController implements Runnable {
     protected ChessBoardPanel gamePanel;
     protected StatusPanel statusPanel;
-    protected MstatusPanel mStatusPanel;
+//    protected MstatusPanel mStatusPanel;
     protected ChessPiece currentPlayer;
     protected int blackScore;
     protected int whiteScore;
@@ -60,19 +60,14 @@ public class GameController implements Runnable {
         boolean whiteOver = this.whiteOver();
 
         if (blackOver && whiteOver) {
-            System.out.println("结束战斗");
             countScore();
             if (blackScore > whiteScore) {
-                System.out.println("黑获胜");
                 JOptionPane.showMessageDialog(null, "黑方获胜");
             } else if (whiteScore > blackScore) {
-                System.out.println("白获胜");
                 JOptionPane.showMessageDialog(null, "白方获胜");
             } else {
-                System.out.println("平局");
                 JOptionPane.showMessageDialog(null, "平局");
             }
-            System.exit(0);
         }
 
         if (currentPlayer.equals(ChessPiece.BLACK)) {
@@ -100,19 +95,14 @@ public class GameController implements Runnable {
         boolean whiteOver = this.whiteOver();
         //判断游戏是否结束
         if (MachineController.randomPut() == null) {
-            System.out.println("Game over");
             countScore();
             if (blackScore > whiteScore) {
-                System.out.println("Black win");
                 JOptionPane.showMessageDialog(null, "Black win");
             } else if (whiteScore > blackScore) {
-                System.out.println("White win");
                 JOptionPane.showMessageDialog(null, "White win");
             } else {
-                System.out.println("draw");
                 JOptionPane.showMessageDialog(null, "draw");
             }
-            System.exit(0);
         }
     }
 
@@ -130,7 +120,6 @@ public class GameController implements Runnable {
                 }
             }
         }
-        //todo: modify the countScore method
     }
 
     public ChessPiece getCurrentPlayer() {
@@ -156,8 +145,8 @@ public class GameController implements Runnable {
             }
             this.convertToChessboard(fileData);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
         }
     }
 
@@ -173,8 +162,7 @@ public class GameController implements Runnable {
             }
             writer.close();
             fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
         }
     }
 
@@ -205,9 +193,6 @@ public class GameController implements Runnable {
                 }
             }
         }
-        if (whiteOver) {
-            System.out.println("执棋方：白棋你没的下了");
-        }
         return whiteOver;
     }
 
@@ -221,9 +206,6 @@ public class GameController implements Runnable {
                 }
             }
         }
-        if (blackOver) {
-            System.out.println("执棋方：黑棋你没的下了");
-        }
         return blackOver;
     }
 
@@ -231,7 +213,6 @@ public class GameController implements Runnable {
         boolean blackOver = this.blackOver();
         boolean whiteOver = this.whiteOver();
         if (blackOver && whiteOver) {
-            System.out.println("Over");
             countScore();
             if (blackScore > whiteScore)
                 JOptionPane.showMessageDialog(null, "black win");
@@ -294,29 +275,33 @@ public class GameController implements Runnable {
             JOptionPane.showMessageDialog(null, "103: " + numberFormatException + "Missing players!", null, JOptionPane.ERROR_MESSAGE);
             // 报错 => 103
         }
-
+        boolean hasWhite = false;
+        boolean hasBlack = false;
         for (int i = 1; i < 9; i++) {
             String[] oneLine = readlines.get(i).split(" ");
             int[] oneL = new int[oneLine.length];
             for (int j = 0; j < oneLine.length; j++) {
                 oneL[j] = Integer.parseInt(oneLine[j]);
+                if(oneL[j]==-1)
+                    hasBlack = true;
+                if(oneL[j]==-1)
+                    hasWhite = true;
                 if (oneL[j] != 0 && oneL[j] != 1 && oneL[j] != -1) {
                     JOptionPane.showMessageDialog(null, "102: Chess error!", null, JOptionPane.ERROR_MESSAGE);
-                    i = 8;
-                    String filePath = JOptionPane.showInputDialog(null, "input the path here");
-                    GameFrame.controller.readFileData(filePath);
-                    break;
+                    return;
                     //oneLine -> int[] 判断有没有非法棋子 + break => 102
                 }
             }
 
             if (oneLine.length != 8) {
                 JOptionPane.showMessageDialog(null, "101: Chessboard error!", null, JOptionPane.ERROR_MESSAGE);
-                String filePath = JOptionPane.showInputDialog(null, "input the path here");
-                GameFrame.controller.readFileData(filePath);
-                break;
+                return;
                 // 报错+break => 101
             }
+        }
+        if(!(hasBlack&&hasWhite)){
+            JOptionPane.showMessageDialog(null, "102: Chess error!", null, JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         for (int i = 9; i < readlines.size(); i++) {
@@ -373,7 +358,6 @@ public class GameController implements Runnable {
             int[] step = steps.get(i);
             newBoard = Automatic.putAutoByStep(newBoard, step);
             this.gamePanel.setChessGridsInt(newBoard);
-            ChessBoardPanel.displayBoard(newBoard);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
