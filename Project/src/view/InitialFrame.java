@@ -150,7 +150,6 @@ public class InitialFrame extends JFrame {
         }
 
         start.addActionListener(e -> {
-            System.out.println("Clicked start Btn");
             dispose();
             JFrame introGame = new IntroductionFrame(700);
             introGame.setVisible(true);
@@ -159,7 +158,6 @@ public class InitialFrame extends JFrame {
         });
 
         this.theme.addActionListener(e -> {
-            System.out.println("Clicked theme Btn");
             dispose();
             JFrame themeFrame = new ThemeFrame(700);
             themeFrame.setVisible(true);
@@ -168,7 +166,6 @@ public class InitialFrame extends JFrame {
         });
 
         exit.addActionListener(e -> {
-            System.out.println("Clicked end Btn");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             System.exit(0);
         });
@@ -230,6 +227,4 @@ public class InitialFrame extends JFrame {
 //        }
 //    }
 }
-
-
 
