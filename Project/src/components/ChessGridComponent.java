@@ -33,11 +33,11 @@ public class ChessGridComponent extends BasicComponent {
 
     @Override
     public void onMouseClicked() {
-        if (GameFrame.getMode() == 1 || GameFrame.getMode() == 0) {
+        /*if (GameFrame.getMode() == 1 || GameFrame.getMode() == 0) {
             System.out.printf("%s clicked (%d, %d)\n", GameFrame.controller.getCurrentPlayer(), row, col);
         } else if (GameFrame.getMode() == 2) {
             System.out.printf("%s clicked (%d, %d)\n", GameFrame.controllerM.getCurrentPlayer(), row, col);
-        }
+        }*/
         playMusic();
         if (this.chessPiece == null) {
             if (!GameFrame.controller.isMachine) {
@@ -59,17 +59,18 @@ public class ChessGridComponent extends BasicComponent {
                     repaint();
                     int[] arr = new int[]{0, this.chessPiece == ChessPiece.BLACK ? -1 : 1, row, col};
                     GameController.getSteps().add(arr);
-                } else if (GameFrame.getMode() == 2) {
-                    if (GameFrame.controllerM.canClickM(row, col)) {
-                        this.chessPiece = GameFrame.controllerM.getCurrentPlayer();
-                        GameFrame.controllerM.swapPlayerM();
-//                    int[] arr = new int[]{1, this.chessPiece == ChessPiece.BLACK ? -1 : 1, row, col};
-//                    GameController.getSteps().add(arr);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Wrong place", null, JOptionPane.ERROR_MESSAGE);
-                    }
-                    repaint();
                 }
+//                else if (GameFrame.getMode() == 2) {
+//                    if (GameFrame.controllerM.canClickM(row, col)) {
+//                        this.chessPiece = GameFrame.controllerM.getCurrentPlayer();
+//                        GameFrame.controllerM.swapPlayerM();
+////                    int[] arr = new int[]{1, this.chessPiece == ChessPiece.BLACK ? -1 : 1, row, col};
+////                    GameController.getSteps().add(arr);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Wrong place", null, JOptionPane.ERROR_MESSAGE);
+//                    }
+//                    repaint();
+//                }
             } else {
                 if (GameFrame.getMode() == 1) {
                     if (GameFrame.controller.canClick(row, col)) {
@@ -107,7 +108,6 @@ public class ChessGridComponent extends BasicComponent {
                 }
             }
         }
-        ChessBoardPanel.displayBoard(ChessBoardPanel.getChessGridsInt());
     }
 
 
@@ -140,36 +140,36 @@ public class ChessGridComponent extends BasicComponent {
         }
     }
 
-    public void drawPiece2(Graphics g) {
-        int current;
-        g.setColor(gridColor);
-        g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
-        if(GameFrame.controllerM.getCurrentPlayer()==ChessPiece.BLUE){
-            current = 2;
-        }else if(GameFrame.controllerM.getCurrentPlayer()==ChessPiece.BLACK){
-            current =-1;
-        }else {
-            current = 1;
-        }
-        if (GameController.canPut(ChessBoardPanel.getChessGridsInt(), current , row, col)) {
-            g.setColor(hintColor);
-            g.fillOval((gridSize - hintSize) / 2, (gridSize - hintSize) / 2, hintSize, hintSize);
-        }
-        if (this.chessPiece != null) {
-            g.setColor(chessPiece.getColor());
-            g.fillOval((gridSize - chessSize) / 2, (gridSize - chessSize) / 2, chessSize, chessSize);
-        }
-    }
+//    public void drawPiece2(Graphics g) {
+//        int current;
+//        g.setColor(gridColor);
+//        g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
+//        if(GameFrame.controllerM.getCurrentPlayer()==ChessPiece.BLUE){
+//            current = 2;
+//        }else if(GameFrame.controllerM.getCurrentPlayer()==ChessPiece.BLACK){
+//            current =-1;
+//        }else {
+//            current = 1;
+//        }
+//        if (GameController.canPut(ChessBoardPanel.getChessGridsInt(), current , row, col)) {
+//            g.setColor(hintColor);
+//            g.fillOval((gridSize - hintSize) / 2, (gridSize - hintSize) / 2, hintSize, hintSize);
+//        }
+//        if (this.chessPiece != null) {
+//            g.setColor(chessPiece.getColor());
+//            g.fillOval((gridSize - chessSize) / 2, (gridSize - chessSize) / 2, chessSize, chessSize);
+//        }
+//    }
 
 
     @Override
     public void paintComponent(Graphics g) {
         super.printComponents(g);
-        if (GameFrame.getMode() != 2) {
+//        if (GameFrame.getMode() != 2) {
             drawPiece(g);
-        } else {
-            drawPiece2(g);
-        }
+//        } else {
+//            drawPiece2(g);
+//        }
     }
 
     public static void playMusic() {
