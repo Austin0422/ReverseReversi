@@ -1,5 +1,6 @@
 package view;
 
+// Panel
 import components.ChessGridComponent;
 import model.ChessPiece;
 
