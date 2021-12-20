@@ -2,7 +2,6 @@ import view.InitialFrame;
 import view.Music;
 
 import javax.swing.*;
-// Created in Dec.
 
 public class Main {
     public static void main(String[] args) {
