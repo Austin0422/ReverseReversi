@@ -54,7 +54,6 @@ public class ChooseColorFrame extends JFrame {
         panel2.add(back);
 
         black.addActionListener(e -> {
-            System.out.println("Clicked black Btn");
             dispose();
             GameFrame gameFrame = new GameFrame(700);
             gameFrame.setVisible(true);
@@ -62,18 +61,7 @@ public class ChooseColorFrame extends JFrame {
             gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         });
 
-//        white.addActionListener(e -> {
-//            HumanVSMachineController.setPlayer(1);
-//            System.out.println("Clicked white Btn");
-//            dispose();
-//            GameFrame gameFrame = new GameFrame(700);
-//            gameFrame.setVisible(true);
-////            gameFrame.setExtendedState(Frame.MAXIMIZED_BOTH);//最大化屏幕
-//            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        });
-
         back.addActionListener(e -> {
-            System.out.println("Clicked back Btn");
             dispose();
             JFrame back = new DifficultyLevelFrame(700);
             back.setVisible(true);
