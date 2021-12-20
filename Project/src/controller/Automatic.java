@@ -22,7 +22,6 @@ public class Automatic {
                 board[e[2]][e[3]] = e[1];
             }
         }
-        ChessBoardPanel.displayBoard(board);
         return board;
     }
 
