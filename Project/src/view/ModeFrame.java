@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class ModeFrame extends JFrame {
     private JButton normal;
-    private JButton multiUser;
+//    private JButton multiUser;
     private JButton humanVSMachine;
     private JButton back;
     private JLabel title;
@@ -26,7 +26,7 @@ public class ModeFrame extends JFrame {
         add(panel1);
         panel1.setOpaque(false);
 
-        JPanel panel2 = new JPanel(new GridLayout(2, 2, 5, 5));
+        JPanel panel2 = new JPanel(new GridLayout(3, 1, 2, 2));
         add(panel2);
         panel2.setOpaque(false);
 
@@ -42,11 +42,11 @@ public class ModeFrame extends JFrame {
         normal.setBorderPainted(false);
         panel2.add(normal);
 
-        multiUser = new JButton("3P GO GO GO !");
-//        multiUser.setSize(100, 50);
-        multiUser.setFont(new Font("Times New Roman", 1, 30));
-        multiUser.setBorderPainted(false);
-        panel2.add(multiUser);
+//        multiUser = new JButton("3P GO GO GO !");
+////        multiUser.setSize(100, 50);
+//        multiUser.setFont(new Font("Times New Roman", 1, 30));
+//        multiUser.setBorderPainted(false);
+//        panel2.add(multiUser);
 
         humanVSMachine = new JButton("Human VS Machine");
 //        humanVSMachine.setSize(100, 50);
@@ -62,7 +62,6 @@ public class ModeFrame extends JFrame {
 
         normal.addActionListener(e -> {
             GameFrame.setMachine(false);
-            System.out.println("Clicked normal Btn");
             dispose();
             GameFrame gameFrame = new GameFrame(700);
             gameFrame.setVisible(true);
@@ -70,19 +69,17 @@ public class ModeFrame extends JFrame {
             gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         });
 
-        multiUser.addActionListener(e -> {
-            GameFrame.setMode(2);
-            System.out.println("Clicked 3P GO GO GO ! Btn");
-            dispose();
-            GameFrame gameFrame = new GameFrame(700);
-            gameFrame.setVisible(true);
-//            gameFrame.setExtendedState(Frame.MAXIMIZED_BOTH);//最大化屏幕
-            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        });
+//        multiUser.addActionListener(e -> {
+//            GameFrame.setMode(2);
+//            dispose();
+//            GameFrame gameFrame = new GameFrame(700);
+//            gameFrame.setVisible(true);
+////            gameFrame.setExtendedState(Frame.MAXIMIZED_BOTH);//最大化屏幕
+//            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        });
 
         humanVSMachine.addActionListener(e -> {
             GameFrame.setMachine(true);
-            System.out.println("Clicked humanVSMachine Btn");
             dispose();
             DifficultyLevelFrame difficultyLevelFrame = new DifficultyLevelFrame(700);
             difficultyLevelFrame.setVisible(true);
@@ -95,7 +92,6 @@ public class ModeFrame extends JFrame {
         });
 
         back.addActionListener(e -> {
-            System.out.println("Clicked back Btn");
             dispose();
             JFrame back = new StartFrame(700);
             back.setVisible(true);
