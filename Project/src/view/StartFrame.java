@@ -61,7 +61,6 @@ public class StartFrame extends JFrame {
         panel2.add(back);
 
         newGame.addActionListener(e -> {
-            System.out.println("Clicked newGame Btn");
             dispose();
             JFrame mode = new ModeFrame(700);
             mode.setVisible(true);
@@ -70,7 +69,6 @@ public class StartFrame extends JFrame {
         });
 
         loadGame.addActionListener(e -> {
-            System.out.println("Clicked Load Btn");
             GameFrame gameFrame = new GameFrame(700);
             gameFrame.setVisible(false);
             gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +96,6 @@ public class StartFrame extends JFrame {
         });
 
         rankingList.addActionListener(e -> {
-            System.out.println("Clicked rankingList Btn");
             dispose();
             JFrame rankListFrame = new RankingListFrame(700);
             rankListFrame.setVisible(true);
@@ -106,7 +103,6 @@ public class StartFrame extends JFrame {
         });
 
         back.addActionListener(e -> {
-            System.out.println("Clicked back Btn");
             dispose();
             JFrame back = new IntroductionFrame(700);
             back.setVisible(true);
