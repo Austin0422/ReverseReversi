@@ -100,8 +100,6 @@ public class MachineController extends GameController {
             ChessBoardPanel.Ok(ChessBoardPanel.getChessGridsInt(), AIPut[0], AIPut[1], 1, -1);
             int[] arr = new int[]{GameFrame.getMode(), 1, AIPut[0], AIPut[1]};
             GameController.getSteps().add(arr);
-            System.out.println("white");
-            ChessBoardPanel.displayBoard(ChessBoardPanel.getChessGridsInt());
             GameFrame.controller.getGamePanel().transformBoard2(ChessBoardPanel.getChessGridsInt());
         }
     }
@@ -116,7 +114,6 @@ public class MachineController extends GameController {
         int[] AIPut = AICanPut2(ChessBoardPanel.getChessGridsInt());
         if (AIPut != null) {
             ChessBoardPanel.Ok(ChessBoardPanel.getChessGridsInt(), AIPut[0], AIPut[1], 1, -1);
-            ChessBoardPanel.displayBoard(ChessBoardPanel.getChessGridsInt());
             int[] arr = new int[]{GameFrame.getMode(), 1, AIPut[0], AIPut[1]};
             GameController.getSteps().add(arr);
             GameFrame.controller.getGamePanel().transformBoard2(ChessBoardPanel.getChessGridsInt());
@@ -130,9 +127,16 @@ public class MachineController extends GameController {
             e.printStackTrace();
         }
         int[] AIPut = AICanPut3(ChessBoardPanel.getChessGridsInt());
+        if(AIPut == null && GameFrame.getMode() == 0) {
+            AIPut = randomPut();
+            ChessBoardPanel.Ok(ChessBoardPanel.getChessGridsInt(), AIPut[0], AIPut[1], 1, -1);
+            ChessBoardPanel.getChessGridsInt()[AIPut[0]][AIPut[1]] = 1;
+            int[] arr = new int[]{GameFrame.getMode(), 1, AIPut[0], AIPut[1]};
+            GameController.getSteps().add(arr);
+            GameFrame.controller.getGamePanel().transformBoard2(ChessBoardPanel.getChessGridsInt());
+        }
         if (AIPut != null) {
             ChessBoardPanel.Ok(ChessBoardPanel.getChessGridsInt(), AIPut[0], AIPut[1], 1, -1);
-            ChessBoardPanel.displayBoard(ChessBoardPanel.getChessGridsInt());
             int[] arr = new int[]{GameFrame.getMode(), 1, AIPut[0], AIPut[1]};
             GameController.getSteps().add(arr);
             GameFrame.controller.getGamePanel().transformBoard2(ChessBoardPanel.getChessGridsInt());
@@ -290,7 +294,6 @@ public class MachineController extends GameController {
     public void gameOverFor0() {
         int[] a = randomPut();
         if (a == null) {
-            System.out.println("GameOver");
             countScore();
             if (GameFrame.controller.getBlackScore() > GameFrame.controller.getWhiteScore())
                 JOptionPane.showMessageDialog(null, "black win");
