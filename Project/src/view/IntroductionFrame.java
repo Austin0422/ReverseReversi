@@ -138,7 +138,6 @@ public class IntroductionFrame extends JFrame {
         panel3.add(back);
 
         next.addActionListener(e -> {
-            System.out.println("Clicked next Btn");
             dispose();
             JFrame next = new StartFrame(700);
             next.setVisible(true);
@@ -146,7 +145,6 @@ public class IntroductionFrame extends JFrame {
         });
 
         back.addActionListener(e -> {
-            System.out.println("Clicked back Btn");
             dispose();
             JFrame back = new InitialFrame(700);
             back.setVisible(true);
