@@ -73,7 +73,6 @@ public class DifficultyLevelFrame extends JFrame {
         panel2.add(back);
 
         easy.addActionListener(e -> {
-            System.out.println("Clicked easy Btn");
             MachineController.setMachineMode(10);
             dispose();
             ChooseColorFrame chooseColor = new ChooseColorFrame(700);
@@ -82,7 +81,6 @@ public class DifficultyLevelFrame extends JFrame {
         });
 
         middle.addActionListener(e -> {
-            System.out.println("Clicked middle Btn");
             MachineController.setMachineMode(100);
             dispose();
             ChooseColorFrame chooseColor = new ChooseColorFrame(700);
@@ -91,7 +89,6 @@ public class DifficultyLevelFrame extends JFrame {
         });
 
         hard.addActionListener(e -> {
-            System.out.println("Clicked hard Btn");
             MachineController.setMachineMode(1000);
             dispose();
             ChooseColorFrame chooseColor = new ChooseColorFrame(700);
@@ -100,7 +97,6 @@ public class DifficultyLevelFrame extends JFrame {
         });
 
         back.addActionListener(e -> {
-            System.out.println("Clicked back Btn");
             dispose();
             JFrame back = new ModeFrame(700);
             back.setVisible(true);
