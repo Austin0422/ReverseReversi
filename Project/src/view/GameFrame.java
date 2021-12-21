@@ -102,6 +102,7 @@ public class GameFrame extends JFrame {
         fresh.setLocation(600, 500);
         add(fresh);
         fresh.addActionListener(e -> {
+            Music.endMusic1();
             ChessBoardPanel.setChessGridsInt(ChessBoardPanel.initialBoard);
             chessBoardPanel.transformBoard2(ChessBoardPanel.initialBoard);
             GameController.setSteps(new ArrayList<>());
@@ -130,6 +131,7 @@ public class GameFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "104 : Wrong FileType", null, JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "106: Other error!(File don't exist)", null, JOptionPane.ERROR_MESSAGE);
             }
         });
 
