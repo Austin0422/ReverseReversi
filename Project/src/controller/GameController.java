@@ -267,6 +267,7 @@ public class GameController implements Runnable {
     // 完成载入棋盘的初始化
     public void convertToChessboard(List<String> readlines) {
         steps = new ArrayList<>(); // 先判断有无非法
+        int chessCount = -4;
         try {
             if (Integer.parseInt(readlines.get(0)) == 1 || Integer.parseInt(readlines.get(0)) == -1) {
                 current = Integer.parseInt(readlines.get(0));
@@ -282,22 +283,30 @@ public class GameController implements Runnable {
             int[] oneL = new int[oneLine.length];
             for (int j = 0; j < oneLine.length; j++) {
                 oneL[j] = Integer.parseInt(oneLine[j]);
-                if(oneL[j]==-1)
+                if(oneL[j]== 1){
                     hasBlack = true;
-                if(oneL[j]==-1)
+                    chessCount++;
+
+                }
+                if(oneL[j]==-1){
                     hasWhite = true;
+                    chessCount++;
+                }
                 if (oneL[j] != 0 && oneL[j] != 1 && oneL[j] != -1) {
                     JOptionPane.showMessageDialog(null, "102: Chess error!", null, JOptionPane.ERROR_MESSAGE);
                     return;
                     //oneLine -> int[] 判断有没有非法棋子 + break => 102
                 }
             }
-
             if (oneLine.length != 8) {
                 JOptionPane.showMessageDialog(null, "101: Chessboard error!", null, JOptionPane.ERROR_MESSAGE);
                 return;
                 // 报错+break => 101
             }
+        }
+        if(chessCount != readlines.size()-9 ){
+            JOptionPane.showMessageDialog(null, "106: Other error!(Steps don't match chessboard)", null, JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if(!(hasBlack&&hasWhite)){
             JOptionPane.showMessageDialog(null, "102: Chess error!", null, JOptionPane.ERROR_MESSAGE);
@@ -355,25 +364,31 @@ public class GameController implements Runnable {
         newBoard[3][4] = 1;
         newBoard[4][3] = 1;
         for (int i = 0; i < steps.size(); i++) {
-            int[] step = steps.get(i);
-            newBoard = Automatic.putAutoByStep(newBoard, step);
-            this.gamePanel.setChessGridsInt(newBoard);
+            if (i < steps.size()) {
+                GameFrame.controller.setCurrentPlayer(steps.get(i)[1] == 1 ? ChessPiece.WHITE : ChessPiece.BLACK);
+                statusPanel.setPlayerText(currentPlayer.name());
+                gamePanel.repaint();
+            }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            int[] step = steps.get(i);
+            newBoard = Automatic.putAutoByStep(newBoard, step);
+            this.gamePanel.setChessGridsInt(newBoard);
             this.gamePanel.transformBoard2(this.gamePanel.getChessGridsInt());
-            if (i < steps.size() - 1) {
-                GameFrame.controller.setCurrentPlayer(steps.get(i + 1)[1] == 1 ? ChessPiece.WHITE : ChessPiece.BLACK);
-            } else {
-                GameFrame.controller.setCurrentPlayer(current == 1 ? ChessPiece.WHITE : ChessPiece.BLACK);
-            }
+
             statusPanel.setPlayerText(currentPlayer.name());
             GameFrame.controller.countScore();
             statusPanel.setScoreText(blackScore, whiteScore);
             statusPanel.repaint();
         }
+        GameFrame.controller.setCurrentPlayer(current == 1 ? ChessPiece.WHITE : ChessPiece.BLACK);
+        statusPanel.setPlayerText(currentPlayer.name());
+        GameFrame.controller.countScore();
+        statusPanel.setScoreText(blackScore, whiteScore);
+        statusPanel.repaint();
     }
 
 }
