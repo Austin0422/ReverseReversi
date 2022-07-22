@@ -1,2 +1,2 @@
 # ReverseReversi
-An imperfect project about Reverse Reversi.
+Reverse Reversi in CS102A course project.
