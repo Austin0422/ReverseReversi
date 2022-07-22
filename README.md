@@ -1,2 +1,2 @@
 # ReverseReversi
-Course project in CS102A.
+Course Project in SUSTech CS102A, Introduction to Computer Programming A.
