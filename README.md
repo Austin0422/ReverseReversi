@@ -1,2 +1,2 @@
 # ReverseReversi
-Here is the Java Project of Reverse Reversi.
+An imperfect project about Reverse Reversi.
